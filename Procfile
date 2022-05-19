@@ -1,1 +1,1 @@
-web: gunicorn user_management.wsgi
+web: gunicorn app:app
