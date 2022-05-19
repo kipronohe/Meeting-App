@@ -9,9 +9,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api
 import django_heroku
 
 
@@ -36,7 +33,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users.apps.UserConfig',
     'social_django',
-    'users',
+    
  ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -115,11 +112,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.RawMediaCloudinaryStorage'
-cloudinary.config (
-  cloud_name = "enock-photoshare", 
-  api_key = "528228593828417", 
-  api_secret = "fpcwnXX4nQPiHpva17H58KySXsk",
-)
+
 # Activate Django-Heroku.
 django_heroku.settings(locals())
 
