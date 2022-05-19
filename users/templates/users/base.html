@@ -19,16 +19,18 @@
       <div class="col-md-12">
         <nav class="navbar navbar-expand-md navbar-light " style="background-color: #f0f5f5">
           <a href="/" class="navbar-brand">Home</a>
-         
+          {% if user.is_authenticated %}
+          <a href="{% url 'create-meeting' %}" class="navbar-brand">Create Meeting</a>
+          <a href="{% url 'view-meeting' %}" class="navbar-brand">View Meetings</a>
+          {% endif %}
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ml-auto">
                   {% if user.is_authenticated %}
-                  <a href="{% url 'add-venue' %}" class="navbar-brand">Add Venue</a>
-                  <a href="{% url 'create-meeting' %}" class="navbar-brand">Create Meeting</a>
-                  <a href="{% url 'view-meeting' %}" class="navbar-brand">View Meetings</a>
+                  <!-- <a href="{% url 'add-venue' %}" class="navbar-brand">Add Venue</a> -->
+
                     <a href="{% url 'users-profile' %}" class="nav-item nav-link">Profile</a>
                     <a href="{% url 'logout' %}" class="nav-item nav-link">Logout</a>
                   {% else %}

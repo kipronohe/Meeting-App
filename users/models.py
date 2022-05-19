@@ -60,7 +60,7 @@ class Meeting(models.Model):
     venue = models.CharField('Name ', max_length=120)
     manager = models.CharField(max_length=60)
     description = models.TextField(blank=True)
-    avatar = models.ImageField(default='default.jpg', upload_to='profile_images')
+    avatar = models.ImageField(upload_to="images/", blank=True, null=True)
     
     def __str__(self):
         return self.name
