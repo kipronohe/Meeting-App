@@ -17,7 +17,7 @@ urlpatterns = [
     re_path('', include('users.urls')),
 
     re_path('login/', CustomLoginView.as_view( template_name='users/login.html',
-                                            name='login'),
+                                            name='login')),
 
     re_path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
 
