@@ -108,7 +108,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # setting configuration parameters globally
 
-
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = 'login'
 
 MEDIA_URL = '/media/'
 # DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.RawMediaCloudinaryStorage'
