@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
+import django_heroku
+import dj_database_url
+from decouple import config
 
 # To keep secret keys in environment variables
 from dotenv import load_dotenv
@@ -54,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMidddleware',
 
 ]
 
@@ -144,7 +148,7 @@ MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = 'login'
 
-
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # social auth configs for github
 SOCIAL_AUTH_GITHUB_KEY = str(os.getenv('GITHUB_KEY'))
 SOCIAL_AUTH_GITHUB_SECRET = str(os.getenv('GITHUB_SECRET'))
@@ -168,3 +172,5 @@ SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+django_heroku.settings(locals())

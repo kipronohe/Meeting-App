@@ -1,3 +1,4 @@
+from datetime import timezone
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -85,6 +86,13 @@ class MeetingForm(forms.ModelForm):
             'my_time_field' : TimePickerInput(),
             'my_date_time_field' : DateTimePickerInput(),
         }
+
+
+        #### DATE VALIDATION
+        
+    def validate_date(meeting_date):
+        if meeting_date < timezone.now().date():
+            raise forms.ValidationError("Date cannot be in the past")
 
 #/end of meeting form
  

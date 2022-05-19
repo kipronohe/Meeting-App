@@ -64,7 +64,8 @@ class Meeting(models.Model):
     
     def __str__(self):
         return self.name
-
+    
+    
     @property
     def Due_date(self):
         today = date.today()
