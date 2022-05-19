@@ -12,14 +12,14 @@
                         <ul>
                             {% for meeting in meeting_list %}
                                <strong>{{meeting}}</strong>
-                               <ul>
+                               <ul> 
                                    <li>Name: {{meeting.name}}</li>
                                    <li>Date: {{meeting.meeting_date}}</li>
                                    <li>Due Time: {{meeting.Due_date}}</li>
                                    <li>Relevance: <b class="text-danger">{{meeting.Past_Time}}!!</b></li>
                                    <li>Venue: {{meeting.venue}}</li>
                                    <li>Description: {{meeting.description}}</li>
-                                   <li>Documents: <img src="media/meeting-docs" class="img-thumbnail" alt="Image" onclick="window.open(this.src)"></li>
+                                   <li>Documents: <img src="{{meeting.avatar.url}}" class="img-thumbnail" alt="Image" onclick="window.open(this.src)"></li>
                                </ul>
                                
                                <a href="{% url 'take_minutes' %}"><button class="btn btn-secondary">Take Minutes </button></a>
