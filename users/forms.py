@@ -1,4 +1,6 @@
 from datetime import timezone
+import datetime
+from email import message
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -64,9 +66,13 @@ class MeetingForm(forms.ModelForm):
                                                               }))
    
     
-    meeting_date = forms.DateField(widget=DatePickerInput)
+    meeting_date = forms.DateField(widget=forms.DateInput(attrs={'class': 'form-control','type':'date'}),required=True)
 
-    
+    def clean_date(self):
+        date = self.cleaned_data['meeting_date']
+        if date<timezone.now().date():
+            raise forms.ValidationError(message='Date cannot be in the past' )
+        return date
               
     description = forms.CharField(max_length=400,
                              required=True,
@@ -77,22 +83,20 @@ class MeetingForm(forms.ModelForm):
 
     avatar = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
 
+
+
     class Meta:
         model = Meeting
-        fields = ['venue', 'name', 'meeting_date','description','avatar']
+        fields = ('venue', 'name', 'meeting_date','description','avatar')
          
+
+
         widgets = {
+            'meeting_date': forms.DateInput(attrs={'type': 'date'}),
             'my_date_field' : DatePickerInput(),
             'my_time_field' : TimePickerInput(),
             'my_date_time_field' : DateTimePickerInput(),
         }
-
-
-        #### DATE VALIDATION
-        
-    def validate_date(meeting_date):
-        if meeting_date < timezone.now().date():
-            raise forms.ValidationError("Date cannot be in the past")
 
 #/end of meeting form
  
@@ -104,11 +108,23 @@ class VenueForm(forms.ModelForm):
 
 
 class MinutesForm(forms.ModelForm):
+    date=forms.DateField(widget=forms.DateInput(attrs={'class': 'form-control','type':'date'}),required=True)
     class Meta:
         model = Minutes
-        fields = ('org_name','date',  'opening', 'members_present', 'members_absent', 'business_from_the_previous_meeting','new_business',
+        fields = ('org_name','date', 'members_present', 'members_absent', 'business_from_the_previous_meeting','new_business',
         'additions_to_the_agenda', 'adjournment', 'minutes_submitted_by', 'minutes_approved_by')      
+       
 
+        widgets = {
+            'business_from_the_previous_meeting':forms.Textarea(attrs={'style': 'height: 100px; width:200px'}),
+            'new_business':forms.Textarea(attrs={'style': 'height: 100px; width:200px'}),
+            'additions_to_the_agenda': forms.Textarea(attrs={'style': 'height: 100px; width:200px'}),
+            'adjournment': forms.Textarea(attrs={'style': 'height: 100px; width:200px'}),
+            'my_date_field' : DatePickerInput(),
+            'my_time_field' : TimePickerInput(),
+            'my_date_time_field' : DateTimePickerInput(),
+
+       }
 
 
 

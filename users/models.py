@@ -1,7 +1,8 @@
+from django import forms
 from django.db import models
 from django.contrib.auth.models import User
 from PIL import Image
-from datetime import date
+from datetime import date, timezone
 
 # Extending User Model Using a One-To-One Link
 class Profile(models.Model):
@@ -38,17 +39,16 @@ class Venue(models.Model):
 
 
 class Minutes(models.Model):
-    org_name = models.CharField('Organization Name', max_length=15)
+    org_name = models.CharField('Organization Name', max_length=20)
     date = models.DateTimeField( 'Date', blank=True, null=True )
-    opening = models.TextField()
-    members_present = models.TextField()
-    members_absent = models.TextField()
-    business_from_the_previous_meeting= models.TextField()
-    new_business = models.TextField()
-    additions_to_the_agenda= models.TextField()
-    adjournment= models.TextField()
-    minutes_submitted_by = models.CharField('Organization Name', max_length=15)
-    minutes_approved_by = models.CharField('Organization Name', max_length=15)
+    members_present = models.CharField( max_length=15)
+    members_absent = models.CharField( max_length=15)
+    business_from_the_previous_meeting= models.TextField(max_length=300)
+    new_business = models.TextField(max_length=300)
+    additions_to_the_agenda= models.TextField(max_length=300)
+    adjournment= models.TextField(max_length=300)
+    minutes_submitted_by = models.CharField( max_length=15)
+    minutes_approved_by = models.CharField( max_length=15)
 
     def __str__(self):
         return self.org_name
@@ -65,7 +65,11 @@ class Meeting(models.Model):
     def __str__(self):
         return self.name
     
-    
+    @property
+    def validate_date(meeting_date):
+        if meeting_date < timezone.now().date():
+           raise forms.ValidationError("Date cannot be in the past")
+
     @property
     def Due_date(self):
         today = date.today()

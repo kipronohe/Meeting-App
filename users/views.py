@@ -1,3 +1,5 @@
+import datetime
+from django import forms
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordChangeView
@@ -8,15 +10,13 @@ from django.contrib.auth.decorators import login_required
 from django.http import Http404,HttpResponseRedirect
 from django.core.exceptions import ObjectDoesNotExist
 
-from .forms import RegisterForm,MeetingForm, LoginForm, UpdateUserForm, UpdateProfileForm, VenueForm
+from .forms import MinutesForm, RegisterForm,MeetingForm, LoginForm, UpdateUserForm, UpdateProfileForm, VenueForm
 from . models import Meeting
 
 def all_meetings(request):
     meeting_list = Meeting.objects.all()
     return render(request, 'users/view_meetings.html',
     {'meeting_list':meeting_list})
-
-    context['today'] = datetime.date.today()
 
 
 def add_venue(request):
@@ -43,12 +43,12 @@ def take_minutes(request):
     taken = False
     if request.method == "POST":
         
-        form = VenueForm(request.POST)
+        form = MinutesForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/take_minutes?taken=True')
     else:
-        form = VenueForm
+        form = MinutesForm
         if 'taken' in request.GET:
             taken =True
 
@@ -106,7 +106,9 @@ class CreateView(View):
     def get(self, request, *args, **kwargs):
         form = self.form_class(initial=self.initial)
         return render(request, self.template_name, {'form': form})
+        
 
+        
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST, request.FILES)
 
