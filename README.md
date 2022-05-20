@@ -6,7 +6,7 @@ Meeting Scheduling App
 **[Enock Kipronoh](https://github.com/encok)**
 
 ## Link to Live Site 
-https://github.com/encok/Photo-Insta
+https://meeting2app.herokuapp.com/
 
 
 
@@ -45,5 +45,5 @@ email: enckkipronoh@gmail.com<br/>
 Phone: 0717854859
 ## License
 This is the link to the MIT license used<br/><br/>
-https://github.com/encok/Photo-Insta/blob/master/LICENSE
+https://github.com/kipronohe/Meeting-App/blob/master/LICENSE
 
