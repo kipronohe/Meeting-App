@@ -1,0 +1,11 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+
+{% for meeting in meetings %}
+
+<a href="{% url 'show-meeting' meeting.meeting_id %}">{{ meeting }}</a>
+
+{% endfor %}
+
+{% endblock %} 

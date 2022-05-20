@@ -1,6 +1,8 @@
 {% extends "users/base.html" %}
 {% block title %} Create_meeting Page {% endblock title%}
 {% block content %}
+<html>
+
     <div class="form-content my-3 p-3">
 		<div class="container">
             <div class="row justify-content-center">
@@ -28,7 +30,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="small mb-1">Venue</label>
-                                            {{ form.venue }}
+                                            {{ form.venue }} 
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -41,14 +43,14 @@
                                 <div class="form-row">
                                     <div class="col-md-6">
 		                                <div class="form-group">
-		                                	<label class="small mb-1">Date</label>
-		                                    {{ form.meeting_date }}
+		                                	<label for ="demo" class="small mb-1">Date</label>
+                                            <input type="date" id="demo" {{ form.meeting_date }}>
 		                                </div>
 		                            </div>
 
                                     <div class="col-md-6">
 		                                <div class="form-group">
-		                                	<label class="small mb-1">Time</label>
+		                                	<label class="small mb-1"></label>
 		                                    {{ form.time }}
 		                                </div>
 		                            </div>
@@ -80,4 +82,21 @@
             </div>
         </div>
 	</div>
+    <script>
+        var todayDate = new Date();
+        var month = todayDate.getMonth()+1; 
+        var year = todayDate.getUTCFullYear() - 0; 
+        var tdate = todayDate.getDate(); 
+        if(month < 10){
+        month = "0" + month 
+        }
+        if(tdate < 10){
+        tdate = "0" + tdate;
+        }
+        var maxDate = year + "-" + month + "-" + tdate;
+        document.getElementById("demo").setAttribute("min", maxDate);
+        console.log(maxDate);
+    </script>
 {% endblock content %}
+
+</html>

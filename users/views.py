@@ -13,6 +13,18 @@ from django.core.exceptions import ObjectDoesNotExist
 from .forms import MinutesForm, RegisterForm,MeetingForm, LoginForm, UpdateUserForm, UpdateProfileForm, VenueForm
 from . models import Meeting
 
+
+def show_meeting(request, meeting_id):
+    meeting = Meeting.objects.get(pk=meeting_id)
+    return render(request, 'users/show_meetings.html',
+    {'meeting':meeting})
+
+def update_meeting(request, meeting_id):
+    meeting = Meeting.objects.get(pk=meeting_id)
+    return render(request, 'users/update_meeting.html',
+    {'meeting':meeting})
+
+
 def all_meetings(request):
     meeting_list = Meeting.objects.all()
     return render(request, 'users/view_meetings.html',

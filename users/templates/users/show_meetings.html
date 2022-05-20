@@ -1,0 +1,52 @@
+{% extends 'users/base.html' %}
+{% block title %}  Show Meeting page {% endblock title%}
+{% block content %}
+
+    <h1>Show Meeting</h1>
+
+    <ul>
+        {% for meeting in meeting_list %}
+        <div class="card">
+            <div class="card-header">
+           <strong>{{meeting}}</strong>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Meeting: {{ meeting.name}}</h5>
+                <p class="card-text">
+           <ul> 
+               
+               <li>Date: {{meeting.meeting_date}}</li>
+               <li>Due Time: {{meeting.Due_date}}</li>
+               <li>Relevance: <b class="text-danger">{{meeting.Past_Time}}!!</b></li>
+               <li>Venue: {{meeting.venue}}</li>
+               <li>Description: {{meeting.description}}</li>
+               <li>Documents: <img src="{{meeting.avatar.url}}" class="img-thumbnail" alt="Image" onclick="window.open(this.src)"></li>
+           </ul>
+           
+           <a href="{% url 'take_minutes' %}"><button class="btn btn-secondary">Take Minutes </button></a>
+     
+           <hr>
+        </p>
+        </div>
+        </div>
+        {% endfor %}
+    </ul>
+
+
+
+  <!-- <table class="table table-striped table-hover table-bordered">
+    <tr>
+        <td> 
+            <li>Name: {{meeting.name}}</li>
+            <li>Date: {{meeting.meeting_date}}</li>
+            <li>Due Time: {{meeting.Due_date}}</li>
+            <li>Relevance: <b class="text-danger">{{meeting.Past_Time}}!!</b></li>
+            <li>Venue: {{meeting.venue}}</li>
+            <li>Description: {{meeting.description}}</li>
+            <li>Documents: <img src="{{meeting.avatar.url}}" class="img-thumbnail" alt="Image" onclick="window.open(this.src)"></li>
+        </td>
+    </tr>
+</table> -->
+{% endblock %}
+
+

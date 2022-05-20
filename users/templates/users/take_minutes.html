@@ -34,7 +34,8 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="small mb-1">Date of Meeting </label>
-                                            {{ form.date }}
+                                            <input type="date" id="demo" {{ form.date }}>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -114,4 +115,19 @@
             </div>
         </div>
 	</div>
+    <script>
+        var todayDate = new Date();
+        var month = todayDate.getMonth()+1; 
+        var year = todayDate.getUTCFullYear() - 0; 
+        var tdate = todayDate.getDate(); 
+        if(month < 10){
+        month = "0" + month 
+        }
+        if(tdate < 10){
+        tdate = "0" + tdate;
+        }
+        var maxDate = year + "-" + month + "-" + tdate;
+        document.getElementById("demo").setAttribute("min", maxDate);
+        console.log(maxDate);
+    </script>
 {% endblock content %}

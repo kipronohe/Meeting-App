@@ -55,6 +55,7 @@ class Minutes(models.Model):
 
 
 class Meeting(models.Model):
+    meeting_id = models.AutoField(primary_key=True),
     name = models.CharField('Meeting Name', max_length=120)
     meeting_date = models.DateTimeField( 'Meeting Date', blank=True, null=True )
     venue = models.CharField('Name ', max_length=120)

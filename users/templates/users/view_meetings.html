@@ -7,13 +7,19 @@
                 <div class="col-lg-7">
                     <div class="card shadow-lg border-0 rounded-lg mt-0 mb-5">
                         <div class="card-header justify-content-center">
-                        	<h3 class="font-weight-light my-4 text-center">Schedule Meeting</h3>
+                        	<h3 class="font-weight-light my-4 text-center">Meeting Schedule </h3>
                         </div>
                         <ul>
                             {% for meeting in meeting_list %}
+                            <div class="card">
+                                <div class="card-header">
                                <strong>{{meeting}}</strong>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">Meeting: {{ meeting.name}}</h5>
+                                    <p class="card-text">
                                <ul> 
-                                   <li>Name: {{meeting.name}}</li>
+                                   
                                    <li>Date: {{meeting.meeting_date}}</li>
                                    <li>Due Time: {{meeting.Due_date}}</li>
                                    <li>Relevance: <b class="text-danger">{{meeting.Past_Time}}!!</b></li>
@@ -22,9 +28,12 @@
                                    <li>Documents: <img src="{{meeting.avatar.url}}" class="img-thumbnail" alt="Image" onclick="window.open(this.src)"></li>
                                </ul>
                                
-                               <a href="{% url 'take_minutes' %}"><button class="btn btn-secondary">Take Minutes </button></a>
-                         
+                               <a href="{% url 'take_minutes' %}"><button class="btn btn-secondary ">Take Minutes </button></a>
+                               <a href="{% url 'take_minutes' %}"><button class="btn btn-secondary m-5">Previous Minutes </button></a>
                                <hr>
+                            </p>
+                            </div>
+                            </div>
                             {% endfor %}
                         </ul>
                     </div>
