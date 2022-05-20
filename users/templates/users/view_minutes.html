@@ -1,0 +1,28 @@
+{% extends "users/base.html" %}
+{% block title %} View_Meeting page {% endblock title%}
+{% block content %}
+
+<div class=" justify-content-center">
+    <h3 class="font-weight-light my-4 text-center">Minutes Recorded </h3>
+</div>
+{% for minute in minutes_list %}
+
+
+<div class="card m-5" style="width: 50rem; height: 40rem">
+    <div class="card-body">
+      <h5 class="card-title">Organization Name: {{minute.org_name}}</h5></br>
+      <h6 class="card-subtitle mb-2 text-muted">Meeting Date: {{minute.date}}</h6>
+      <p class="card-text"><strong>Members Present:</strong> {{minute.members_present}}</p>
+      <p class="card-text"><strong>Members Absent:</strong> {{minute.members_absent}}</p>
+      <p class="card-text"><strong>Previous Discussions:</strong> {{minute.business_from_the_previous_meeting}}</p>
+      <p class="card-text"><strong>Minutes for Today :</strong> {{minute.new_business}}</p>
+      <p class="card-text"><strong>Additional Agenda: </strong>{{minute.additions_to_the_agenda}}</p>
+      <p class="card-text"><strong>Adjournment: </strong>{{minute.adjournment}}</p>
+      <p class="card-text"><strong>Submitted By:</strong> {{minute.minutes_submitted_by}}</p>
+      <p class="card-text"><strong>Approved By:</strong> {{minute.minutes_approved_by}}</p>
+
+    </div>
+  </div>
+  {% endfor %}
+{% endblock content %}
+

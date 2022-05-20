@@ -11,7 +11,7 @@ from django.http import Http404,HttpResponseRedirect
 from django.core.exceptions import ObjectDoesNotExist
 
 from .forms import MinutesForm, RegisterForm,MeetingForm, LoginForm, UpdateUserForm, UpdateProfileForm, VenueForm
-from . models import Meeting
+from . models import Meeting, Minutes
 
 
 def show_meeting(request, meeting_id):
@@ -29,6 +29,12 @@ def all_meetings(request):
     meeting_list = Meeting.objects.all()
     return render(request, 'users/view_meetings.html',
     {'meeting_list':meeting_list})
+
+def all_minutes(request):
+    minutes_list = Minutes.objects.all()
+    return render(request, 'users/view_minutes.html',
+    {'minutes_list':minutes_list})
+
 
 
 def add_venue(request):
